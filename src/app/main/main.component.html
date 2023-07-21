@@ -1,0 +1,19 @@
+<app-spinner *ngIf="!(usersData$ | async) || !(paymentsData$ | async) || !(countriesData$ | async)"></app-spinner>
+<div class="row"><div class="col-md-4" *ngIf="usersData$ | async ; else loading">
+  <h1>Users</h1>
+  <app-list [data]="usersData$"></app-list>
+</div>
+<div class="col-md-4" *ngIf="paymentsData$ | async; else loading">
+  <h1>Payments</h1>
+  <app-list [data]="paymentsData$"></app-list>
+</div>
+<div class="col-md-4" *ngIf="countriesData$ | async; else loading">
+  <h1>Countries</h1>
+  <app-list [data]="countriesData$"></app-list>
+</div>
+</div>
+<ng-template #loading>
+  <div class="spinner-container">
+    <app-spinner></app-spinner>
+  </div>
+</ng-template>

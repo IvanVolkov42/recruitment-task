@@ -1,0 +1,41 @@
+<mat-form-field>
+  <input matInput (keyup)="setSearchTerm($event)" />
+</mat-form-field>
+  <mat-list *ngIf="filteredData$ | async as data">
+    <mat-list-item *ngFor="let item of data | slice:0:(isFullList ? data.length : 10); trackBy: trackByFn">
+      <mat-checkbox></mat-checkbox>
+      <!-- Display item based on data type -->
+    <ng-container *ngIf="isUser(item)">
+      <div class="user-info" (click)="openUserDetails(item)">
+        <div class="name">{{ item.firstName }} {{ item.lastName }}</div>
+        <div class="email">{{ item.email }}</div>
+        <span class="avatar" *ngIf="item.avatarUrl">
+          <img [src]="item.avatarUrl" alt="Avatar" width="32" height="32" />
+        </span>
+        <button class="btn btn-primary details-button" style="margin-left: 5px">Show details</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="isPayment(item)">
+      <div>{{ item.status }}</div>
+      <div style="margin-left: 5px">{{ item.count }}</div>
+    </ng-container>
+
+    <ng-container *ngIf="isCountry(item)">
+      <div class="country-info" (click)="openCountryDetails(item)">
+      <span>{{ item.name }}</span>
+      <span> {{item.code}}</span>
+      <span class="avatar" *ngIf="item.flag">
+        <img [src]="item.flag" alt="Flag" width="32" height="32" />
+      </span>
+          <button class="btn btn-primary details-button" style="margin-left: 5px">Show details</button>
+        </div>
+    </ng-container>
+  </mat-list-item>
+    <div>
+      <button class="btn btn-info" style="margin: 5px" *ngIf="!isFullList" (click)="goToList()">See full list</button>
+    </div>
+    <div *ngIf="data.length === 0">
+      No items to display.
+    </div>
+</mat-list>

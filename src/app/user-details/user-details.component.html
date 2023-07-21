@@ -1,0 +1,15 @@
+<div *ngIf="user">
+  <h2>User Details</h2>
+  <button class="btn btn-primary" (click)="goBack()">Back</button>
+
+  <div class="user-info">
+    <div><strong>First Name:</strong> {{ user.firstName }}</div>
+    <div><strong>Last Name:</strong> {{ user.lastName }}</div>
+    <div><strong>Email:</strong> {{ user.email }}</div>
+    <div><strong>Id:</strong> {{ user.id }}</div>
+  </div>
+
+  <div class="avatar" *ngIf="user.avatarUrl">
+    <img [src]="user.avatarUrl" alt="Avatar" width="150" height="150" />
+  </div>
+</div>

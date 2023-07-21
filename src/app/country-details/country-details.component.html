@@ -1,0 +1,17 @@
+<div *ngIf="country">
+  <h2>Country Details</h2>
+  <button class="btn btn-primary" (click)="goBack()">Back</button>
+
+  <div class="user-info">
+    <div><strong>Country:</strong> {{ country.name  }}</div>
+    <div><strong>Code:</strong> {{ country.code }}</div>
+    <div><strong>Id:</strong> {{ country.id }}</div>
+    <div *ngIf="country.someWeirdServerFieldNameWithCount">
+      <strong>Count:</strong> {{ country.someWeirdServerFieldNameWithCount }}
+    </div>
+  </div>
+
+  <div class="avatar" *ngIf="country.flag">
+    <img [src]="country.flag" alt="Flag" width="150" height="150" />
+  </div>
+</div>
